@@ -70,6 +70,7 @@ group :development do
   gem 'i18n_generators'
   gem 'rubocop-fjord', require: false
   gem 'rubocop-rails', require: false
+  gem 'erd'
 end
 
 group :test do
@@ -79,5 +80,6 @@ group :test do
   gem 'webdrivers'
 end
 
+gem 'devise'
 gem 'carrierwave'
 gem 'kaminari'

@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= t('books') %></h1>
+<h1><%= t('lists.books') %></h1>
 <nav class="page-nav">
   <%= link_to('日本語', :locale => 'ja') %> |
   <%= link_to('English', :locale => 'en') %>
@@ -10,11 +10,11 @@
   <div class="index-item">
     <%= render book %>
     <p>
-      <%= link_to t('button.show'), book %>
+      <%= link_to t('button.show', model: t('book')), book %>
     </p>
   </div>
   <% end %>
 </div>
 <nav class="page-nav">
-  <%= link_to t('button.new'), new_book_path %>
+  <%= link_to t('button.new', model: t('book')), new_book_path %>
 </nav>

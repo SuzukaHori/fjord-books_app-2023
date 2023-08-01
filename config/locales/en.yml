@@ -225,16 +225,18 @@ en:
         memo: Memo
         picture: Picture
         title: Title
-  books: Books
+  book: book
+  lists:
+    books: Books
   button:
-    show: Show this book
-    new:  New book
-    back: Back to books
-    destroy: Destroy this book
+    show: Show this %{model}
+    new:  New %{model}
+    back: Back to %{model}
+    destroy: Destroy this %{model}
   notice:
-    create_success: Book was successfully created.
-    update_success: Book was successfully updated.
-    destroy_success: Book was successfully destroyed.
+    create_success: "%{model} was successfully created."
+    update_success: "%{model} was successfully updated."
+    destroy_success: "%{model} was successfully destroyed."
   title:
-    edit: Editing book
-    new: New book
+    edit: Editing %{model}
+    new: New %{model}

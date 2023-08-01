@@ -191,10 +191,12 @@ ja:
         memo: 説明
         picture: 写真
         title: タイトル
-  books: 本の一覧
+  book: 本
+  lists:
+    books: 本の一覧
   button:
-    show: この本を表示
-    new: 本を追加
+    show: この%{model}を表示
+    new: "%{model}を追加"
     back: 一覧に戻る
     destroy: 削除
   notice:

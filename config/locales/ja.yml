@@ -192,7 +192,6 @@ ja:
         picture: 写真
         title: タイトル
   book: 本
-  Book: 本
   lists:
     books: 本の一覧
   button:

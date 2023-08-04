@@ -1,16 +1,5 @@
 ---
 en:
-  activerecord:
-    models:
-      book: Book
-    attributes:
-      book:
-        author: Author
-        memo: Memo
-        picture: Picture
-        title: Title
-  lists:
-    books: Books
   button:
     show: Show this %{model}
     new:  New %{model}

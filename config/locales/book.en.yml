@@ -2,7 +2,7 @@
 en:
   activerecord:
     models:
-      book: book
+      book: Book
     attributes:
       book:
         author: Author

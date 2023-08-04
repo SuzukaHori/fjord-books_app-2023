@@ -9,7 +9,6 @@ en:
         memo: Memo
         picture: Picture
         title: Title
-  book: book
   lists:
     books: Books
   button:

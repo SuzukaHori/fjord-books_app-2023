@@ -181,29 +181,3 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-
-  activerecord:
-    models:
-      book: 本
-    attributes:
-      book:
-        author: 著者
-        memo: 説明
-        picture: 写真
-        title: タイトル
-  book: 本
-  lists:
-    books: 本の一覧
-  button:
-    show: この%{model}を表示
-    new: "%{model}を追加"
-    back: 一覧に戻る
-    destroy: 削除
-  notice:
-    create_success: 作成に成功しました。
-    update_success: 更新に成功しました。    
-    destroy_success: 削除に成功しました。
-  title:
-    edit: 編集
-    new: 新規作成
-  

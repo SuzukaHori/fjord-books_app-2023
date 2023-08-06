@@ -1,0 +1,19 @@
+<h1><%= User.human_attribute_name(:profile) %></h1>
+
+<div class="show-item">
+   <h3><%= User.human_attribute_name(:name) %></h3>
+   <p><%= @user.name %></p>
+   <h3><%= User.human_attribute_name(:email) %></h3>
+   <p><%= @user.email %></p>
+   <h3><%= User.human_attribute_name(:postcode) %></h3>
+   <p><%= @user.postcode || "登録なし" %></p>
+   <h3><%= User.human_attribute_name(:address) %></h3>
+   <p><%= @user.address || "登録なし" %></p>
+   <h3><%= User.human_attribute_name(:introduction) %></h3>
+   <p><%= @user.introduction || "登録なし" %></p>
+</div>
+
+<nav class="page-nav">
+   <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
+   <%= link_to t('devise.registrations.edit.title', resource: User.human_attribute_name(:profile)), edit_user_registration_path %>
+</nav>

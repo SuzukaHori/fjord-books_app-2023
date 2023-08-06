@@ -1,13 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
 <h1><%= t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)) %></h1>
-<% if user_signed_in? %>
-  Logged in as <%= current_user.email %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else%>
-  <%= link_to "Sign up", new_user_registration_path%>
-  <% link_to "Login", new_user_session_path%>
-<%end%>
+<nav class="page-nav">
+  <strong><%= t('devise.shared.links.sign_in_with_provider', provider: current_user.name) %></strong> |
+  <%= link_to User.human_attribute_name(:profile),  "/users/#{current_user.id}" %>
+  <%= link_to t('devise.sessions.new.sign_out'), destroy_user_session_path, method: :delete %>
+</nav>
 
 <div id="books" class="index-items">
   <% @books.each do |book| %>
@@ -24,4 +22,5 @@
 
 <nav class="page-nav">
     <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
+    <%= link_to User.human_attribute_name(:list), users_path %>
 </nav>

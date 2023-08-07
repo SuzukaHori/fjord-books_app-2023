@@ -66,6 +66,7 @@ group :development do
   # gem "spring"
 
   gem 'erb_lint', require: false
+  gem 'letter_opener_web', '~> 2.0'
   gem 'erd'
   gem 'faker'
   gem 'i18n_generators'

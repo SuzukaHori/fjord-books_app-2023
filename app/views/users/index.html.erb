@@ -5,7 +5,7 @@
     <p><%= User.human_attribute_name(:introduction) %> : <%= user.introduction %></p>
   </div>
 <% end %>
+<%= paginate @users %>
 <nav class="page-nav">
   <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
 </nav>
-<%= paginate @users %>

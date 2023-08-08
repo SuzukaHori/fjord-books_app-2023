@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-  devise_for :users
-  resources :books
   root to: 'books#index'
-  
+  resources :books
+  devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end

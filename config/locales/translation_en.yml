@@ -18,3 +18,5 @@ en:
         postcode: Postcode
         address: Address
         introduction: Self-introduction
+  title:
+    books: BooksApp

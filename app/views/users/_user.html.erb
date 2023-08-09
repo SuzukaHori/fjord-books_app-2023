@@ -1,9 +1,7 @@
 <div id="<%= dom_id user %>">
 
   <p>
-    <% if user.avatar.attached? %>
-      <%= image_tag(rails_blob_path(user.avatar)) %>
-    <% end %>
+    <%= image_tag(user.avatar.variant(:icon), class: "user-icon") if user.avatar.attached?%>
   </p>
 
   <p>

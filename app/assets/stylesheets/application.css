@@ -14,6 +14,6 @@
  *= require_self
  */
 
- .user-icon{
-   /* border-radius: 50%; */
- }
+.user-icon {
+  border-radius: 50%;
+}

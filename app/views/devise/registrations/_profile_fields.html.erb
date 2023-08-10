@@ -23,6 +23,6 @@
   <%= f.file_field :avatar %>
   <div class="icon_wrapper">
     <p id="icon_label">変更前のアイコン</p>
-    <%= image_tag(current_user.avatar.variant(:icon), class: "user-icon")  if current_user.avatar.attached?%>
+    <%= image_tag(current_user.avatar.variant(:icon), class: "user-icon")  if current_user.avatar.attached? %>
   </div>
 </div>

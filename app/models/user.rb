@@ -13,7 +13,7 @@ class User < ApplicationRecord
   private
 
   def avatar_type
-    extension = ['image/png', 'image/jpg', 'image/gif']
+    extension = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
     errors.add(:avatar, 'はjpg・png・gifのいずれかの形式でアップロードしてください') unless avatar.content_type.in?(extension)
   end
 end

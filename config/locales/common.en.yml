@@ -1,0 +1,14 @@
+---
+en:
+  button:
+    show: Show this %{model}
+    new:  New %{model}
+    back: Back to %{model}
+    destroy: Destroy this %{model}
+  notice:
+    create_success: "%{model} was successfully created."
+    update_success: "%{model} was successfully updated."
+    destroy_success: "%{model} was successfully destroyed."
+  title:
+    edit: Editing %{model}
+    new: New %{model}

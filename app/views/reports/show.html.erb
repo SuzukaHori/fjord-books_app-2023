@@ -1,4 +1,5 @@
 <%= render @report %>
+<%= render 'comments/comments', commentable: @report, comment: @comments %>
 
 <div>
   <%= link_to "Edit this report", edit_report_path(@report) %> |

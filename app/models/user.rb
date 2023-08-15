@@ -8,12 +8,13 @@ class User < ApplicationRecord
     attachable.variant :icon, resize_to_fill: [100, 100]
   end
 
-  validates :avatar_type, presence: false
+  validate :avatar_type
 
   private
 
   def avatar_type
-    extension = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
-    errors.add(:avatar, 'はjpg・png・gifのいずれかの形式でアップロードしてください') unless avatar.content_type.in?(extension)
+    return unless avatar.attached?
+
+    errors.add(:avatar, 'はjpg・png・gifのいずれかの形式でアップロードしてください') unless avatar.image?
   end
 end

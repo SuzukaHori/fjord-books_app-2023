@@ -15,6 +15,6 @@ class User < ApplicationRecord
   def avatar_type
     return unless avatar.attached?
 
-    errors.add(:avatar, 'はjpg・png・gifのいずれかの形式でアップロードしてください') unless avatar.image?
+    errors.add(:avatar, :incorrect_file_formats, file_formats: 'jpg・png・gif') unless avatar.image?
   end
 end

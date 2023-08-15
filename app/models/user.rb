@@ -8,7 +8,7 @@ class User < ApplicationRecord
     attachable.variant :icon, resize_to_fill: [100, 100]
   end
 
-  validate :avatar_type
+  validates :avatar_type, presence: false
 
   private
 

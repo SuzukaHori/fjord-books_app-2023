@@ -18,4 +18,4 @@ ja:
         avatar: アイコン
   common:
     edit: 
-      before: 変更前の%{item}
+      before_change: 変更前の%{item}

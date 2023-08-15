@@ -18,7 +18,7 @@
     <%= f.label :avatar %><br />
     <%= f.file_field :avatar %>
     <div class="icon_wrapper">
-      <p id="icon_label"><%= t('common.edit.before', item: User.human_attribute_name(:avatar)) %></p>
+      <p id="icon_label"><%= t('common.edit.before_change', item: User.human_attribute_name(:avatar)) %></p>
       <%= image_tag(current_user.avatar.variant(:icon), class: "user-icon")  if current_user.avatar.attached? %>
     </div>
   </div>

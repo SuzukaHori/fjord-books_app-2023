@@ -15,3 +15,10 @@ ja:
         postal_code: 郵便番号
         address: 住所
         self_introduction: 自己紹介文
+        avatar: アイコン
+    errors:
+      messages:
+        incorrect_file_formats: は%{file_formats}でアップロードしてください
+  common:
+    edit: 
+      before_change: 変更前の%{item}

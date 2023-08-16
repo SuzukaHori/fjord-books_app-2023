@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+.icon_wrapper {
+  text-align: center;
+  margin: 0px;
+}
+
+.user-icon {
+  border-radius: 50%;
+}
+
+#icon_label {
+  font-size: 14px;
+}

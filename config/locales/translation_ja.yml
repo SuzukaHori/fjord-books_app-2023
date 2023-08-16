@@ -18,5 +18,9 @@ ja:
         postcode: 郵便番号
         address: 住所
         introduction: 自己紹介
+    errors:
+      models:
+        user:
+          incorrect_postcode: は半角数字7桁で入力してください
   title:
     books: 本アプリ

@@ -1,6 +1,17 @@
-   <%= form_with model: [commentable, Comment.new] do |f| %>
-   <%= f.label :content, style: "display: block" %>
-   <%= f.text_field :content %>
+<div>
+<% unless @comments.empty? %>
+   <% @comments.each do |comment| %>
+      <%= comment.content %>
+      <%= User.find(comment.user_id).name %><br>
+   <% end %>
+<% else %>
+   "コメントはありません"
+<% end %>
+</div>
+
+<%= form_with model: [commentable, Comment.new] do |f| %>
+<%= f.label :content, style: "display: block" %>
+<%= f.text_field :content %>
 <div class="actions">
    <%= f.submit "コメントする" %>
 </div>

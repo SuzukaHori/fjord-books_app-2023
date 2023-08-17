@@ -3,9 +3,9 @@ class CommentsController < ApplicationController
       @comment = @commentable.comments.build(comment_params)
       @comment.user_id = current_user.id
       if @comment.save
-         redirect_to reports_path, notice: 'Comment was successfully created.'
+         redirect_to reports_path(@comment), notice: 'Comment was successfully created.'
       else
-         render :new, status: :unprocessable_entity
+         render plain: "NG"
       end
    end
 

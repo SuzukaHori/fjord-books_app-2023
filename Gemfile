@@ -66,8 +66,10 @@ group :development do
   # gem "spring"
 
   gem 'erb_lint', require: false
+  gem 'erd'
   gem 'faker'
   gem 'i18n_generators'
+  gem 'letter_opener_web', '~> 2.0'
   gem 'rubocop-fjord', require: false
   gem 'rubocop-rails', require: false
 end
@@ -80,4 +82,6 @@ group :test do
 end
 
 gem 'carrierwave'
+gem 'devise'
+gem 'devise-i18n'
 gem 'kaminari'

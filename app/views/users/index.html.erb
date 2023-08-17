@@ -1,0 +1,19 @@
+<h1><%= User.human_attribute_name(:list) %></h1>
+
+<div class="index-items">
+  <% @users.each do |user| %>
+  <div class="index-item">
+    <div>
+      <h2><%= link_to user.name, "/users/#{user.id}" %></h2>
+      <strong><%= User.human_attribute_name(:introduction) %></strong><br>
+      <%= user.introduction %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<%= paginate @users %>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
+</nav>

@@ -1,5 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
+  <header>
+    <div class="header-wrapper">
+      <ul>
+        <li class="login"><%= t('devise.shared.links.sign_in_with_provider', provider: current_user.name) %></li>
+        <li class="header-link"><%= link_to User.human_attribute_name(:profile),  "/users/#{current_user.id}" %></li>
+        <li class="header-link"><%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %></li>
+        <li class="header-link"><%= link_to User.human_attribute_name(:list), users_path %></li>
+        <li class="logout"><%= button_to t('devise.sessions.new.sign_out'), destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </div>
+  </header>
+
 <h1><%= t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)) %></h1>
 
 <div id="books" class="index-items">
@@ -14,7 +26,3 @@
 </div>
 
 <%= paginate @books %>
-
-<nav class="page-nav">
-    <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
-</nav>

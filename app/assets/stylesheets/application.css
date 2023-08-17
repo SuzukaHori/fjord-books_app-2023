@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+header{
+   margin-bottom: 20px;
+}
+
+ .header-wrapper {
+   background-color: #37abf9;
+   color: white;
+   padding: 10px 20px;
+   display: flex;
+   justify-content: space-between;
+   height: 72px;
+ }
+
+ .header-link, .login, .logout{
+   display: inline-block;
+   margin-right: 48px;
+ }
+
+ li.login{
+   color: black;
+ }
+
+ .header-link a {
+   color: white;
+   text-decoration: none;
+   padding: 5px 10px;
+   border-radius: 5px;
+   transition: background-color 0.3s, color 0.3s;
+ }
+
+ .header-wrapper li{
+   float: left;
+ }

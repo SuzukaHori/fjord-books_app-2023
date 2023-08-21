@@ -1,3 +1,7 @@
-button.comment_destroy{
-  
+.comment_wrapper{
+  margin-bottom: 40px;
+}
+
+.comment_wrapper form.button_to{
+  display: inline-block;
 }

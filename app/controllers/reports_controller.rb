@@ -7,15 +7,20 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @comments =
-      Comment.where(commentable_type: 'Report', commentable_id: params[:id])
+    @comments = @report.comments
   end
 
   def new
     @report = Report.new
   end
 
-  def edit; end
+  def edit
+    if @report.user == current_user
+      render :edit
+    else
+      redirect_to report_url(@report)
+    end
+  end
 
   def create
     @report = Report.new(report_params)
@@ -28,7 +33,7 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.update(report_params)
+    if @report.user == current_user
       redirect_to report_url(@report),
                   notice: 'Report was successfully updated.'
     else
@@ -37,8 +42,12 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    @report.destroy
-    redirect_to reports_url, notice: 'Report was successfully destroyed.'
+    if @report.user == current_user
+      @report.destroy
+      redirect_to reports_url, notice: 'Report was successfully destroyed.'
+    else
+      redirect_to report_url, notice: "他の人が作成した日報は削除できません"
+    end
   end
 
   private

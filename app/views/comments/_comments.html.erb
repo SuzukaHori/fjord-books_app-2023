@@ -1,20 +1,19 @@
-<div>
-  <% unless @comments.empty? %>
-    <% @comments.each do |comment| %>
-      <%= comment.id %>
+<h2>コメント</h2>
+<% unless comments.empty? %>
+  <% comments.each do |comment| %>
+    <div class="comment_wrapper">
       <%= comment.content %>
-      <%= User.find(comment.user_id).name %>
-      <%= button_to '削除', book_comment_path(comment.commentable_id), { method: :delete, params: { comment_id: comment.id } } %>
+      <%= comment.user.name %>
+      <%= button_to '削除', polymorphic_url([commentable, comment]), { method: :delete, class: "comment_destroy", params: { comment_id: comment.id } } %>
     <% end %>
   <% else %>
-    "コメントはありません"
+    <p>まだコメントはありません</p>
   <% end %>
 </div>
-
 <%= form_with model: [commentable, Comment.new] do |f| %>
-<%= f.label :content, style: "display: block" %>
-<%= f.text_field :content %>
-<div class="actions">
-  <%= f.submit "コメントする" %>
-</div>
+  <%= f.label :content, style: "display: block" %>
+  <%= f.text_field :content %>
+  <div class="actions">
+    <%= f.submit "コメントする" %>
+  </div>
 <% end %>

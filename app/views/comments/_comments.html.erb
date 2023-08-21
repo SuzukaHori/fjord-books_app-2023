@@ -1,18 +1,20 @@
 <div>
-<% unless @comments.empty? %>
-   <% @comments.each do |comment| %>
+  <% unless @comments.empty? %>
+    <% @comments.each do |comment| %>
+      <%= comment.id %>
       <%= comment.content %>
-      <%= User.find(comment.user_id).name %><br>
-   <% end %>
-<% else %>
-   "コメントはありません"
-<% end %>
+      <%= User.find(comment.user_id).name %>
+      <%= button_to '削除', book_comment_path(comment.commentable_id), { method: :delete, params: { comment_id: comment.id } } %>
+    <% end %>
+  <% else %>
+    "コメントはありません"
+  <% end %>
 </div>
 
 <%= form_with model: [commentable, Comment.new] do |f| %>
 <%= f.label :content, style: "display: block" %>
 <%= f.text_field :content %>
 <div class="actions">
-   <%= f.submit "コメントする" %>
+  <%= f.submit "コメントする" %>
 </div>
 <% end %>

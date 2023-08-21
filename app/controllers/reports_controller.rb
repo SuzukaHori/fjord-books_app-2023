@@ -6,7 +6,10 @@ class ReportsController < ApplicationController
     @reports = Report.all
   end
 
-  def show; end
+  def show
+    @comments =
+      Comment.where(commentable_type: 'Report', commentable_id: params[:id])
+  end
 
   def new
     @report = Report.new
@@ -17,7 +20,8 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     if @report.save
-      redirect_to report_url(@report), notice: 'Report was successfully created.'
+      redirect_to report_url(@report),
+                  notice: 'Report was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +29,8 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      redirect_to report_url(@report), notice: 'Report was successfully updated.'
+      redirect_to report_url(@report),
+                  notice: 'Report was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -43,6 +48,9 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:title, :content).merge(user_id: current_user.id)
+    params
+      .require(:report)
+      .permit(:title, :content)
+      .merge(user_id: current_user.id)
   end
 end

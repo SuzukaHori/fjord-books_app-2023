@@ -1,5 +1,13 @@
+.comments_container{
+  margin-top: 40px;
+}
+
+.comments_container h3{
+  font-size: 20px;
+}
+
 .comment_wrapper{
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .comment_wrapper form.button_to{

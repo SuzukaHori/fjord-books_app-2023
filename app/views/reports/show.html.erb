@@ -1,9 +1,18 @@
+<h2>レポートの詳細</h2>
+
 <%= render @report %>
+<p>
+  <strong>Content:</strong>
+  <%= @report.content %>
+</p>
+
 <%= render 'comments/comments', commentable: @report, comments: @comments %>
-<div>
+
 <% if @report.user == current_user %>
   <%= link_to "Edit this report", edit_report_path(@report) %>
   <%= button_to "Destroy this report", @report, method: :delete %>
 <% end %>
+
+<nav class="page-nav">
   <%= link_to "Back to reports", reports_path %>
-</div>
+</nav>

@@ -1,12 +1,14 @@
 <h1>Reports</h1>
 
-<div id="reports">
   <% @reports.each do |report| %>
+    <div class="index-item">
     <%= render report %>
+    <%= link_to "Show this report", report %>
+    </div>
     <p>
-      <%= link_to "Show this report", report %>
     </p>
   <% end %>
-</div>
 
-<%= link_to "New report", new_report_path %>
+<nav class="page-nav">
+  <%= link_to "New report", new_report_path %>
+</nav>

@@ -35,7 +35,6 @@ end
 Book.destroy_all
 
 Book.transaction do # rubocop:disable Metrics/BlockLength
-
   User.first.books.create!(
     title: 'Ruby超入門',
     memo: 'Rubyの文法の基本をやさしくていねいに解説しています。',

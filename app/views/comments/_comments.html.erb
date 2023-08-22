@@ -1,13 +1,18 @@
 <div class="comments_container">
-<h3><%= Comment.model_name.human %></h3>
 <% unless comments.empty? %>
+<table>
+  <tr>
+  <th><%= Comment.model_name.human %></th>
+  </tr>
   <% comments.each do |comment| %>
-    <div class="comment_wrapper">
-      <strong><%= comment.content %></strong>
-      <%= Comment.human_attribute_name(:writer) %>：<%= comment.user.name %>
-      <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete, class: "comment_destroy", params: { comment_id: comment.id } } %>
-    </div>
+    <tr>
+      <td><strong><%= comment.content %></strong></td>
+      <td><%= comment.user.name %></td>
+      <td><%= l comment.created_at, format: :short %></td>
+      <td><%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete, class: "comment_destroy", params: { comment_id: comment.id } } %></td>
+    </tr>
   <% end %>
+</table>
 <% else %>
   <p><%= t('column.message.nothing', model: Comment.model_name.human) %></p>
 <% end %>
@@ -15,7 +20,7 @@
 
 <%= form_with model: [commentable, Comment.new] do |f| %>
   <%= f.label :content, style: "display: block" %>
-  <%= f.text_field :content %>
+  <%= f.text_field :content, required: true %>
   <div class="actions">
     <%= f.submit t('column.message.do', action: Comment.model_name.human ) %>
   </div>

@@ -26,6 +26,7 @@ ja:
         title: タイトル
         writer: 投稿者
         content: 本文
+        created_at: 投稿日
   column:
     message:
       nothing: まだ%{model}はありません

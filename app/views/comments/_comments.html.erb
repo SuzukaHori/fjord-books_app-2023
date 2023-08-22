@@ -1,15 +1,15 @@
 <div class="comments_container">
-<h3>コメント</h3>
+<h3><%= Comment.model_name.human %></h3>
 <% unless comments.empty? %>
   <% comments.each do |comment| %>
     <div class="comment_wrapper">
       <strong><%= comment.content %></strong>
-      投稿者：<%= comment.user.name %>
-      <%= button_to '削除', polymorphic_url([commentable, comment]), { method: :delete, class: "comment_destroy", params: { comment_id: comment.id } } %>
+      <%= Comment.human_attribute_name(:writer) %>：<%= comment.user.name %>
+      <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete, class: "comment_destroy", params: { comment_id: comment.id } } %>
     </div>
   <% end %>
 <% else %>
-  <p>まだコメントはありません</p>
+  <p><%= t('column.message.nothing', model: Comment.model_name.human) %></p>
 <% end %>
 </div>
 
@@ -17,6 +17,6 @@
   <%= f.label :content, style: "display: block" %>
   <%= f.text_field :content %>
   <div class="actions">
-    <%= f.submit "コメントする" %>
+    <%= f.submit t('column.message.do', action: Comment.model_name.human ) %>
   </div>
 <% end %>

@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
     path = set_each_path(@commentable)
 
     if @comment.save
-      redirect_to path, notice: 'Comment was successfully created.'
+      redirect_to path, notice: t('controllers.common.notice_create', name: Comment.model_name.human) 
     else
-      redirect_to path, alert: 'Failed to create comment.'
+      redirect_to path, status: :unprocessable_entity
     end
   end
 
@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:comment_id])
     @comment.destroy
     path = set_each_path(@commentable)
-    redirect_to path, notice: t('controllers.common.notice_destroy', name: "コメント")
+    redirect_to path, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content)
   end
 
-  def set_each_path(commentable)
+  def set_each_path(commentable) #TODO:リファクタリング
    if commentable.is_a?(Report)
      report_path(commentable)
    elsif commentable.is_a?(Book)

@@ -20,8 +20,8 @@
   </p>
 
   <p>
-    <strong><%= "投稿者" %>:</strong>
-    <%= book.user.name if book.user%>
+    <strong><%= Book.human_attribute_name(:writer) %>:</strong>
+    <%= book.user.name if book.user %>
   </p>
 
 </div>

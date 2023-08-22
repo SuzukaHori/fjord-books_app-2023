@@ -26,7 +26,7 @@ class ReportsController < ApplicationController
     @report = Report.new(report_params)
     if @report.save
       redirect_to report_url(@report),
-                  notice: 'Report was successfully created.'
+                  notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
   def update
     if @report.user == current_user
       redirect_to report_url(@report),
-                  notice: 'Report was successfully updated.'
+                  notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,9 +44,9 @@ class ReportsController < ApplicationController
   def destroy
     if @report.user == current_user
       @report.destroy
-      redirect_to reports_url, notice: 'Report was successfully destroyed.'
+      redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
     else
-      redirect_to report_url, notice: "他の人が作成した日報は削除できません"
+      redirect_to report_url
     end
   end
 

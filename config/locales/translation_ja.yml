@@ -12,9 +12,21 @@ ja:
         memo: メモ
         picture: 画像
         title: タイトル
+        writer: 投稿者
       user:
         name: 氏名
         postal_code: 郵便番号
         address: 住所
         self_introduction: 自己紹介文
         avatar: ユーザ画像
+      comment:
+        writer: 投稿者
+        content: コメント文
+      report:
+        title: タイトル
+        writer: 投稿者
+        content: 本文
+  column:
+    message:
+      nothing: まだ%{model}はありません
+      do: "%{action}をする"

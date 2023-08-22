@@ -19,4 +19,9 @@
     <%= image_tag(book.picture_url) if book.picture.present? %>
   </p>
 
+  <p>
+    <strong><%= "投稿者" %>:</strong>
+    <%= book.user.name if book.user%>
+  </p>
+
 </div>

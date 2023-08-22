@@ -6,7 +6,7 @@
 
   <p>
     <strong><%= Report.human_attribute_name(:writer) %></strong>
-    <%= report.user.name %>
+    <%= report.user.name.present? ? report.user.name : report.user.email %>
   </p>
 
   <p>

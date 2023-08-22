@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :reports do
-    resources :comments, only: [:create, :destroy], module: :reports
+    resources :comments, only: [:create, :destroy, :update], module: :reports
   end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   devise_for :users

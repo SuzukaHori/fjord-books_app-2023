@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.user == current_user
+    if @report.update(report_params) && @report.user == current_user
       redirect_to report_url(@report),
                   notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else

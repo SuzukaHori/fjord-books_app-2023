@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :set_comment, only: %i[destroy]
+
   def create
     @comment = @commentable.comments.build(comment_params)
     @comment.user_id = current_user.id
@@ -13,7 +15,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:comment_id])
     @comment.destroy
     redirect_to polymorphic_url([@commentable, @comment]), notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
@@ -22,5 +23,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:comment_id])
   end
 end

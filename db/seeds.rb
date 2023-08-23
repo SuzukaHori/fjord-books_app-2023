@@ -58,11 +58,16 @@ Book.transaction do # rubocop:disable Metrics/BlockLength
 
   50.times do
     random_num = User.pluck(:id).sample
-    User.find(random_num).books.create!(
+    user = User.find(random_num)
+    user.books.create!(
       title: Faker::Book.title,
       memo: Faker::Book.genre,
       author: Faker::Book.author,
       picture: picture_file('no-image.png')
+    )
+    user.reports.create!(
+      title: "#{user.name}の日報",
+      content: "今日は#{Faker::Book.title}を読みました。"
     )
   end
 end

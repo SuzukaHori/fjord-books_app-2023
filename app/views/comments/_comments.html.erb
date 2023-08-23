@@ -1,25 +1,25 @@
 <div class="comments_container">
-<% unless comments.empty? %>
-<table>
-  <caption><%= Comment.model_name.human %></caption>
-  <% comments.each do |comment| %>
-    <tr>
-      <td><strong><%= comment.content %></strong></td>
-      <td><%= comment.user.name.present? ? comment.user.name : comment.user.email %></td>
-      <td><%= l comment.created_at, format: :short %></td>
-      <% if comment.user == current_user %>
-        <td><%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete, params: { comment_id: comment.id } } %></td>
+  <% unless comments.empty? %>
+    <table>
+      <caption><%= Comment.model_name.human %></caption>
+      <% comments.each do |comment| %>
+        <tr>
+          <td><strong><%= comment.content %></strong></td>
+          <td><%= comment.user.name.present? ? comment.user.name : comment.user.email %></td>
+          <td><%= l comment.created_at, format: :short %></td>
+          <% if comment.user == current_user %>
+            <td><%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete, params: { comment_id: comment.id } } %></td>
+          <% end %>
+        </tr>
       <% end %>
-    </tr>
+    </table>
+  <% else %>
+    <p><%= t('column.message.nothing', model: Comment.model_name.human) %></p>
   <% end %>
-</table>
-<% else %>
-  <p><%= t('column.message.nothing', model: Comment.model_name.human) %></p>
-<% end %>
 </div>
 
 <%= form_with model: [commentable, Comment.new] do |f| %>
-  <%= f.label :content, style: "display: block" %>
+  <%= f.label :content %>
   <%= f.text_field :content, required: true %>
   <div class="actions">
     <%= f.submit t('column.message.do', action: Comment.model_name.human ) %>

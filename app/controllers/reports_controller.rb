@@ -48,7 +48,7 @@ class ReportsController < ApplicationController
       @report.destroy
       redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
     else
-      redirect_to report_url
+      redirect_to report_url, status: :unprocessable_entity
     end
   end
 
@@ -59,9 +59,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params
-      .require(:report)
-      .permit(:title, :content)
-      .merge(user_id: current_user.id)
+    params.require(:report).permit(:title, :content).merge(user_id: current_user.id)
   end
 end

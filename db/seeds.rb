@@ -72,4 +72,13 @@ Book.transaction do # rubocop:disable Metrics/BlockLength
   end
 end
 
+# 画像は読み込みに時間がかかるので一部のデータだけにする
+User.order(:id).each.with_index(1) do |user, n|
+  next unless (n % 8).zero?
+
+  number = rand(1..6)
+  image_path = Rails.root.join("db/seeds/avatar-#{number}.png")
+  user.avatar.attach(io: File.open(image_path), filename: 'avatar.png')
+end
+
 puts '初期データの投入が完了しました。' # rubocop:disable Rails/Output

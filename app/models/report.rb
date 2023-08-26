@@ -3,8 +3,12 @@
 class Report < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :mentions, foreign_key: 'mentioning_id', dependent: :destroy
-  has_many :mentioning_reports, through: :mentions, source: :mentioning
+
+  has_many :active_mentions, class_name:  "Mention", foreign_key: 'mentioning_id', dependent: :destroy
+  has_many :mentioning_reports, through: :active_mentions, source: :mentioned
+
+  has_many :passive_mentions,  class_name:  "Mention", foreign_key: "mentioned_id", dependent: :destroy
+  has_many :mentioned_reports, through: :passive_mentions, source: :mentioning
 
   validates :title, presence: true
   validates :content, presence: true
@@ -18,10 +22,10 @@ class Report < ApplicationRecord
   end
 
   def mention(other_report)
-    mentions.create!(mentioned_id: other_report.id)
+    active_mentions.create!(mentioned_id: other_report.id)
   end
 
   def mention_destroy(other_report)
-    mentions.find_by(mentioned_id: other_report.id).destroy
+    active_mentions.find_by(mentioned_id: other_report.id).destroy
   end
 end

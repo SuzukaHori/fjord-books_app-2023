@@ -101,7 +101,9 @@ GEM
     concurrent-ruby (1.2.0)
     crass (1.0.6)
     date (3.3.3)
-    debug (1.7.1)
+    debug (1.8.0)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     devise (4.9.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -117,6 +119,9 @@ GEM
       rainbow
       rubocop
       smart_properties
+    erd (0.8.1)
+      nokogiri
+      ruby-graphviz
     erubi (1.12.0)
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
@@ -134,6 +139,9 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    io-console (0.6.0)
+    irb (1.7.4)
+      reline (>= 0.3.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -228,6 +236,8 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.7.0)
+    reline (0.3.8)
+      io-console (~> 0.5)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -254,6 +264,8 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
@@ -314,6 +326,7 @@ DEPENDENCIES
   devise
   devise-i18n
   erb_lint
+  erd
   faker
   i18n_generators
   image_processing (~> 1.2)

@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @comments = @report.comments
+    @comments = @report.comments.order(:id)
   end
 
   def new

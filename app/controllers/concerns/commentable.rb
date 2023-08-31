@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[destroy]
+module Commentable
+  extend ActiveSupport::Concern
 
   def create
     @comment = @commentable.comments.build(comment_params)

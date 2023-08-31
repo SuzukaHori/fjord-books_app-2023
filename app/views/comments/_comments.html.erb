@@ -1,5 +1,5 @@
 <div class="comments_container">
-  <% unless comments.empty? %>
+  <% if comments.present? %>
     <table>
       <caption><%= Comment.model_name.human %></caption>
       <% comments.each do |comment| %>

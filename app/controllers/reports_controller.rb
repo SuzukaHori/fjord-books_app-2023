@@ -20,7 +20,7 @@ class ReportsController < ApplicationController
     if @report.user == current_user
       render :edit
     else
-      redirect_to report_url(@report)
+      render file: Rails.public_path.join('404.html'), status: :not_found
     end
   end
 
@@ -48,7 +48,7 @@ class ReportsController < ApplicationController
       @report.destroy
       redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
     else
-      redirect_to report_url, status: :unprocessable_entity
+      render file: Rails.public_path.join('422.html'), status: :unprocessable_entity
     end
   end
 

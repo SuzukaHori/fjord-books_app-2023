@@ -3,7 +3,6 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
 
-  # GET /reports or /reports.json
   def index
     @reports = Report.all.order(:id).page(params[:page])
   end

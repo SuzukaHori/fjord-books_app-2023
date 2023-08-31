@@ -65,6 +65,15 @@ Book.transaction do # rubocop:disable Metrics/BlockLength
       author: Faker::Book.author,
       picture: picture_file('no-image.png')
     )
+  end
+end
+
+Report.destroy_all
+
+Report.transaction do
+  50.times do
+    random_num = User.pluck(:id).sample
+    user = User.find(random_num)
     user.reports.create!(
       title: "#{user.name}の日報",
       content: "今日は#{Faker::Book.title}を読みました。"

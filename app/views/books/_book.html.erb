@@ -21,7 +21,7 @@
 
   <p>
     <strong><%= Book.human_attribute_name(:user) %>:</strong>
-    <%= book.user.name.present? ? book.user.name : book.user.email %>
+    <%= display_username_or_email(book) %>
   </p>
 
 </div>

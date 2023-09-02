@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
+  include ReportsHelper
   before_action :set_report, only: %i[edit update destroy]
 
   def index
@@ -55,7 +56,7 @@ class ReportsController < ApplicationController
   end
 
   def create_mention(report)
-    mentioned_report_ids = report.content.scan(%r{http://localhost:3000/reports/(\d+)}).map { |ids| ids[0] }
+    mentioned_report_ids = create_report_id_array(report.content)
     mentioned_report_ids.each do |mentioned_id|
       mention = @report.active_mentions.new(mentioned_id: mentioned_id)
       mention.save

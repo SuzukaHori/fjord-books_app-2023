@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
+  include ReportsHelper
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
@@ -12,6 +13,7 @@ class Report < ApplicationRecord
 
   validates :title, presence: true
   validates :content, presence: true
+  validate :content, :mentions_are_unique
 
   def editable?(target_user)
     user == target_user
@@ -19,5 +21,12 @@ class Report < ApplicationRecord
 
   def created_on
     created_at.to_date
+  end
+
+  def mentions_are_unique
+    mentioned_report_ids = create_report_id_array(content)
+    if mentioned_report_ids.length != mentioned_report_ids.uniq.length
+      errors.add(:content, "に含まれる日報のリンクは、重複できません")
+    end
   end
 end

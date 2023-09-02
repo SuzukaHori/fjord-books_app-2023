@@ -26,6 +26,13 @@ class ReportsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+
+    mentioned_report_ids = find_mentioned_report_ids(@report)
+    mentioned_report_ids.each do |mentioned_id|
+      mention = @report.active_mentions.new
+      mention.mentioned_id = mentioned_id
+      mention.save
+    end 
   end
 
   def update
@@ -50,5 +57,9 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :content)
+  end
+
+  def find_mentioned_report_ids(report)
+    report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).map{|ids|ids[0]}
   end
 end

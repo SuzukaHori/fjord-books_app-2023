@@ -21,22 +21,17 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
 
-    if @report.save
+    if @report.save && create_mention(@report)
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
-
-    mentioned_report_ids = find_mentioned_report_ids(@report)
-    mentioned_report_ids.each do |mentioned_id|
-      mention = @report.active_mentions.new
-      mention.mentioned_id = mentioned_id
-      mention.save
-    end 
   end
 
   def update
     if @report.update(report_params)
+      Mention.where(mentioning_id: @report.id).destroy_all
+      create_mention(@report)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
@@ -59,7 +54,11 @@ class ReportsController < ApplicationController
     params.require(:report).permit(:title, :content)
   end
 
-  def find_mentioned_report_ids(report)
-    report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).map{|ids|ids[0]}
+  def create_mention(report)
+    mentioned_report_ids = report.content.scan(%r{http://localhost:3000/reports/(\d+)}).map { |ids| ids[0] }
+    mentioned_report_ids.each do |mentioned_id|
+      mention = @report.active_mentions.new(mentioned_id: mentioned_id)
+      mention.save
+    end
   end
 end

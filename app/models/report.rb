@@ -25,8 +25,8 @@ class Report < ApplicationRecord
 
   def mentions_are_unique
     mentioned_report_ids = create_report_id_array(content)
-    if mentioned_report_ids.length != mentioned_report_ids.uniq.length
-      errors.add(:content, "に含まれる日報のリンクは、重複できません")
-    end
+    return if mentioned_report_ids.length == mentioned_report_ids.uniq.length
+
+    errors.add(:content, 'に含まれる日報のリンクは、重複できません')
   end
 end

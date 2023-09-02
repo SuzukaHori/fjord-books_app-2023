@@ -21,10 +21,13 @@ class ReportsController < ApplicationController
 
   def create
     @report = current_user.reports.new(report_params)
-
-    if @report.save && create_mention(@report)
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    else
+    begin
+      ActiveRecord::Base.transaction do
+        @report.save!
+        create_mention(@report)
+        redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+      end
+    rescue StandardError
       render :new, status: :unprocessable_entity
     end
   end
@@ -56,10 +59,12 @@ class ReportsController < ApplicationController
   end
 
   def create_mention(report)
+    return unless report.content.include?('http://localhost:3000/reports/')
+
     mentioned_report_ids = create_report_id_array(report.content)
     mentioned_report_ids.each do |mentioned_id|
-      mention = @report.active_mentions.new(mentioned_id: mentioned_id)
-      mention.save
+      mention = report.active_mentions.new(mentioned_id:)
+      mention.save!
     end
   end
 end

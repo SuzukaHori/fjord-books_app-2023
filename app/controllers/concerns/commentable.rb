@@ -4,7 +4,7 @@ module Commentable
   extend ActiveSupport::Concern
 
   def create
-    @comment = @commentable.comments.build(comment_params)
+    @comment = @commentable.comments.build(comment_params.merge(user: current_user))
     @comment.user_id = current_user.id
 
     if @comment.save

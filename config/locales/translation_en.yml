@@ -26,7 +26,7 @@ en:
         title: Title
         content: Content
         user: Writer
-        created_at: Created date
+        created_at: Created at
   column:
     message:
       nothing: No %{model} submitted yet

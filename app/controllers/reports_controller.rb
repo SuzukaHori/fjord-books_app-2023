@@ -33,11 +33,14 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.update(report_params)
-      Mention.where(mentioning_id: @report.id).destroy_all
-      create_mention(@report)
-      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    else
+    begin
+      ActiveRecord::Base.transaction do
+        @report.update(report_params)
+        @report.active_mentions.destroy_all
+        create_mention(@report)
+        redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+      end
+    rescue
       render :edit, status: :unprocessable_entity
     end
   end

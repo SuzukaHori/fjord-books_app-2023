@@ -16,11 +16,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    if @report.user == current_user
-      render :edit
-    else
-      render file: Rails.public_path.join('404.html'), status: :not_found
-    end
+    current_user.reports.find(params[:id])
   end
 
   def create
@@ -43,12 +39,8 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    if @report.user == current_user
-      @report.destroy
-      redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
-    else
-      render file: Rails.public_path.join('422.html'), status: :unprocessable_entity
-    end
+    current_user.reports.find(params[:id]).destroy!
+    redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
 
   private

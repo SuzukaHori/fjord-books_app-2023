@@ -5,7 +5,7 @@
       <% comments.each do |comment| %>
         <tr>
           <td><strong><%= comment.content %></strong></td>
-          <td><%= display_username_or_email(comment) %></td>
+          <td><%= comment.user.name_or_email %></td>
           <td><%= l comment.created_at, format: :short %></td>
           <% if comment.user == current_user %>
             <td><%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete, params: { comment_id: comment.id } } %></td>

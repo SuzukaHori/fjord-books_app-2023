@@ -15,11 +15,8 @@ module Commentable
   end
 
   def destroy
-    if @comment.user == current_user && @comment.destroy
-      redirect_to polymorphic_url([@commentable, @comment]), notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
-    else
-      render file: Rails.public_path.join('422.html'), status: :unprocessable_entity
-    end
+    current_user.comments.find(params[:id]).destroy!
+    redirect_to polymorphic_url([@commentable, @comment]), notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private

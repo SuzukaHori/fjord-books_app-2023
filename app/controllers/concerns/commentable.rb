@@ -3,6 +3,10 @@
 module Commentable
   extend ActiveSupport::Concern
 
+  included do
+    before_action :set_comment, only: %i[destroy]
+  end
+
   def create
     @comment = @commentable.comments.build(comment_params.merge(user: current_user))
     @comment.user_id = current_user.id

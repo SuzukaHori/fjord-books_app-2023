@@ -3,7 +3,6 @@
 class Books::CommentsController < ApplicationController
   include Commentable
   before_action :set_commentable
-  before_action :set_comment, only: %i[destroy]
 
   private
 

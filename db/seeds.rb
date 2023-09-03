@@ -35,21 +35,21 @@ end
 Book.destroy_all
 
 Book.transaction do # rubocop:disable Metrics/BlockLength
-  User.first.books.create!(
+  Book.create!(
     title: 'Ruby超入門',
     memo: 'Rubyの文法の基本をやさしくていねいに解説しています。',
     author: '五十嵐 邦明',
     picture: picture_file('cho-nyumon.jpg')
   )
 
-  User.second.books.create!(
+  Book.create!(
     title: 'チェリー本',
     memo: 'プログラミング経験者のためのRuby入門書です。',
     author: '伊藤 淳一',
     picture: picture_file('cherry-book.jpg')
   )
 
-  User.third.books.create!(
+  Book.create!(
     title: '楽々ERDレッスン',
     memo: '実在する帳票から本当に使えるテーブル設計を導く画期的な本！',
     author: '羽生 章洋',
@@ -57,9 +57,7 @@ Book.transaction do # rubocop:disable Metrics/BlockLength
   )
 
   50.times do
-    random_num = User.pluck(:id).sample
-    user = User.find(random_num)
-    user.books.create!(
+    Book.create!(
       title: Faker::Book.title,
       memo: Faker::Book.genre,
       author: Faker::Book.author,

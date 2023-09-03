@@ -9,7 +9,6 @@ module Commentable
 
   def create
     @comment = @commentable.comments.build(comment_params.merge(user: current_user))
-    @comment.user_id = current_user.id
 
     if @comment.save
       redirect_to polymorphic_url([@commentable, @comment]), notice: t('controllers.common.notice_create', name: Comment.model_name.human)

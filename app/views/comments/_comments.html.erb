@@ -19,6 +19,7 @@
     <p><%= t('column.message.nothing', model: Comment.model_name.human) %></p>
   <% end %>
 </div>
+
 <%= form_with model: [commentable, Comment.new] do |f| %>
   <%= f.label :content %>
   <%= f.text_field :content, required: true %>

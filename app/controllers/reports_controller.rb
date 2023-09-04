@@ -33,16 +33,14 @@ class ReportsController < ApplicationController
   end
 
   def update
-    begin
-      ActiveRecord::Base.transaction do
-        @report.update(report_params)
-        @report.active_mentions.destroy_all
-        create_mention(@report)
-        redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-      end
-    rescue
-      render :edit, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      @report.update(report_params)
+      @report.active_mentions.destroy_all
+      create_mention(@report)
+      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     end
+  rescue StandardError
+    render :edit, status: :unprocessable_entity
   end
 
   def destroy

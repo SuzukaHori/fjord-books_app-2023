@@ -1,9 +1,20 @@
-<h3>この日報が言及している日報</h3>
-<% report.mentioning_reports.each do |report| %>
-  <p><%= link_to report.title, report_path(report) %></p>
-<% end %>
-----
-<h3>この日報に言及している日報</h3>
-<% report.mentioned_reports.each do |report| %>
-  <%= link_to report.title, report_path(report) %>
+<% if (report.active_mentions.present?) || (report.passive_mentions.present?) %>
+  <div class="mentions-container">
+    <strong>この日報が言及している日報</strong>
+    <ul>
+      <% report.mentioning_reports.each do |report| %>
+        <nav class="page-nav">
+          <li><%= link_to report.title, report_path(report) %></li>
+        </nav>
+      <% end %>
+    </ul>
+    <strong>この日報に言及している日報</strong>
+    <ul>
+      <% report.mentioned_reports.each do |report| %>
+        <nav class="page-nav">
+          <li><%= link_to report.title, report_path(report) %></li>
+        </nav>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

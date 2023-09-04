@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  include ReportsHelper
+  include Mentionable
   before_action :set_report, only: %i[edit update destroy]
 
   def index
@@ -34,7 +34,7 @@ class ReportsController < ApplicationController
 
   def update
     ActiveRecord::Base.transaction do
-      @report.update(report_params)
+      @report.update!(report_params)
       @report.active_mentions.destroy_all
       create_mention(@report)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
@@ -57,15 +57,5 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :content)
-  end
-
-  def create_mention(report)
-    return unless report.content.include?('http://localhost:3000/reports/')
-
-    mentioned_report_ids = create_report_id_array(report.content)
-    mentioned_report_ids.each do |mentioned_id|
-      mention = report.active_mentions.new(mentioned_id:)
-      mention.save!
-    end
   end
 end

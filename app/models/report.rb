@@ -13,7 +13,7 @@ class Report < ApplicationRecord
 
   validates :title, presence: true
   validates :content, presence: true
-  validate :content, :mentions_are_unique
+  validate :content, :report_url_must_be_unique
 
   def editable?(target_user)
     user == target_user
@@ -23,9 +23,9 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def mentions_are_unique
-    mentioned_report_ids = create_report_id_array(content)
-    return if mentioned_report_ids.length == mentioned_report_ids.uniq.length
+  def report_url_must_be_unique
+    return if content.exclude?(base_url)
+    return if mentions_are_unique?(content)
 
     errors.add(:content, 'に含まれる日報のリンクは、重複できません')
   end

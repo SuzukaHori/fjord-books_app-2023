@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
         @report.save!
-        create_mention(@report)
+        create_mention(@report, @report.content)
         redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
       end
     rescue StandardError
@@ -36,7 +36,7 @@ class ReportsController < ApplicationController
     ActiveRecord::Base.transaction do
       @report.update!(report_params)
       @report.active_mentions.destroy_all
-      create_mention(@report)
+      create_mention(@report, @report.content)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     end
   rescue StandardError

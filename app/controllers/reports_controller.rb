@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[show edit update destroy]
+  before_action :set_report, only: %i[show]
+  before_action :set_report_if_poster, only: %i[edit update destroy]
 
   def index
     @reports = Report.includes(:user).order(:id).page(params[:page])
@@ -15,9 +16,7 @@ class ReportsController < ApplicationController
     @report = Report.new
   end
 
-  def edit
-    current_user.reports.find(params[:id])
-  end
+  def edit; end
 
   def create
     @report = current_user.reports.new(report_params)
@@ -30,7 +29,7 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.update(report_params) && @report.user == current_user
+    if @report.update(report_params)
       redirect_to report_url(@report),
                   notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
@@ -39,7 +38,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    current_user.reports.find(params[:id]).destroy!
+    @report.destroy!
     redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
 
@@ -47,6 +46,10 @@ class ReportsController < ApplicationController
 
   def set_report
     @report = Report.find(params[:id])
+  end
+
+  def set_report_if_poster
+    @report = current_user.reports.find(params[:id])
   end
 
   def report_params

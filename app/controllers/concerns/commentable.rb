@@ -3,10 +3,6 @@
 module Commentable
   extend ActiveSupport::Concern
 
-  included do
-    before_action :set_comment, only: %i[destroy]
-  end
-
   def create
     @comment = @commentable.comments.build(comment_params.merge(user: current_user))
 
@@ -26,9 +22,5 @@ module Commentable
 
   def comment_params
     params.require(:comment).permit(:content)
-  end
-
-  def set_comment
-    @comment = Comment.find(params[:comment_id])
   end
 end

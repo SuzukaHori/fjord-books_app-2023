@@ -9,7 +9,7 @@
           <td><%= l comment.created_at, format: :short %></td>
           <td>
             <% if comment.user == current_user %>
-              <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete, params: { comment_id: comment.id } } %>
+              <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete } %>
             <% end %>
           </td>
         </tr>

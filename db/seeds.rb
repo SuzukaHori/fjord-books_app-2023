@@ -90,6 +90,7 @@ User.order(:id).each.with_index(1) do |user, n|
 end
 
 Report.destroy_all
+Mention.destroy_all
 
 users = User.all.to_a
 times = Array.new(55) { Faker::Time.between(from: 5.days.ago, to: 1.day.ago) }.sort
@@ -113,10 +114,11 @@ contents = <<~TEXT.lines(chomp: true)
   自己をところが岡田さんからしかしそうあるですのうでた。
   ほかでも単にして根ざしましないですますて。
   何しろはなはだなっば話もこうないます事ある。
-  大分幾分お話を解るありやいるです事に黙っないです。
-  しっかりの今度になってこの時でもっとも向いなかっなくと上るた事だ。
-  深いませましがあまりご本場見るましものましなけれございます。
+  http://localhost:3000/reports/1 この日報いいね
+  http://localhost:3000/reports/2 この日報は誤り
+  http://localhost:3000/reports/3, http://localhost:3000/reports/4 この2つは読むべき
 TEXT
+include Mentionable
 Report.transaction do
   55.times do |n|
     time = times[n]
@@ -124,7 +126,9 @@ Report.transaction do
     title = titles.sample
     content_length = [*1..3].sample
     content = contents.sample(content_length).join("\n")
-    user.reports.create!(title:, content:, created_at: time, updated_at: time)
+    report = user.reports.new(title:, content:, created_at: time, updated_at: time)
+    report.save!
+    create_mention(report)
   end
 end
 

@@ -3,18 +3,18 @@
 module Mentionable
   extend ActiveSupport::Concern
 
-  def create_mention(model, text)
-    return unless text.include?(base_url)
+  def create_mention(model)
+    return unless model.content.include?(base_url)
 
-    mentioned_ids = text.scan(/#{base_url}(\d+)/).flatten
+    mentioned_ids = extract_ids_from_content(model.content)
     mentioned_ids.each do |mentioned_id|
       mention = model.active_mentions.new(mentioned_id:)
       mention.save!
     end
   end
 
-  def mentions_are_unique?(text)
-    mentioned_ids = create_id_array(text)
+  def mentions_are_unique?(content)
+    mentioned_ids = extract_ids_from_content(content)
     mentioned_ids.length == mentioned_ids.uniq.length
   end
 
@@ -24,7 +24,7 @@ module Mentionable
     "http://localhost:3000/reports/"
   end
 
-  def create_id_array(text)
-    text.scan(/#{base_url}(\d+)/).flatten
+  def extract_ids_from_content(content)
+    content.scan(/#{base_url}(\d+)/).flatten
   end
 end

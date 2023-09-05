@@ -114,11 +114,7 @@ contents = <<~TEXT.lines(chomp: true)
   自己をところが岡田さんからしかしそうあるですのうでた。
   ほかでも単にして根ざしましないですますて。
   何しろはなはだなっば話もこうないます事ある。
-  http://localhost:3000/reports/1 この日報いいね
-  http://localhost:3000/reports/2 この日報は誤り
-  http://localhost:3000/reports/3, http://localhost:3000/reports/4 この2つは読むべき
 TEXT
-include Mentionable
 Report.transaction do
   55.times do |n|
     time = times[n]
@@ -126,10 +122,21 @@ Report.transaction do
     title = titles.sample
     content_length = [*1..3].sample
     content = contents.sample(content_length).join("\n")
-    report = user.reports.new(title:, content:, created_at: time, updated_at: time)
-    report.save!
-    create_mention(report)
+    user.reports.create!(title:, content:, created_at: time, updated_at: time)
   end
+
+  report_mentioning = users.sample.reports.create!(
+    title: titles.sample,
+    content: 'http://localhost:3000/reports/1 この日報いいね'
+  )
+  report_mentioning.active_mentions.create!(mentioned_id: 1)
+
+  report_mentioning_twice = users.sample.reports.create!(
+    title: titles.sample,
+    content: 'http://localhost:3000/reports/1 http://localhost:3000/reports/2 これは読むべき'
+  )
+  report_mentioning_twice.active_mentions.create!(mentioned_id: 1)
+  report_mentioning_twice.active_mentions.create!(mentioned_id: 2)
 end
 
 # dependent: :destroy で全件削除されているはずだが念のため

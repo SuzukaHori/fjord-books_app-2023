@@ -21,7 +21,7 @@ module Mentionable
   private
 
   def base_url
-    "http://localhost:3000/reports/"
+    'http://localhost:3000/reports/'
   end
 
   def extract_ids_from_content(content)

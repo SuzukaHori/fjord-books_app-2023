@@ -21,15 +21,15 @@ class ReportsController < ApplicationController
 
   def create
     @report = current_user.reports.new(report_params)
-    # begin
+    begin
       ActiveRecord::Base.transaction do
         @report.save!
         create_mention(@report)
       end
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    # rescue StandardError
-    #   render :new, status: :unprocessable_entity
-    # end
+    rescue StandardError
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update

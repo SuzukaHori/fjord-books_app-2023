@@ -16,22 +16,6 @@ end
 
 puts '実行中です。しばらくお待ちください...' # rubocop:disable Rails/Output
 
-User.destroy_all
-
-User.transaction do
-  50.times do |n|
-    name = Faker::Name.name
-    User.create!(
-      email: "sample-#{n}@example.com",
-      password: 'password',
-      name:,
-      postal_code: "123-#{n.to_s.rjust(4, '0')}",
-      address: Faker::Address.full_address,
-      self_introduction: "こんにちは、#{name}です。"
-    )
-  end
-end
-
 Book.destroy_all
 
 Book.transaction do # rubocop:disable Metrics/BlockLength
@@ -62,6 +46,22 @@ Book.transaction do # rubocop:disable Metrics/BlockLength
       memo: Faker::Book.genre,
       author: Faker::Book.author,
       picture: picture_file('no-image.png')
+    )
+  end
+end
+
+User.destroy_all
+
+User.transaction do
+  50.times do |n|
+    name = Faker::Name.name
+    User.create!(
+      email: "sample-#{n}@example.com",
+      password: 'password',
+      name:,
+      postal_code: "123-#{n.to_s.rjust(4, '0')}",
+      address: Faker::Address.full_address,
+      self_introduction: "こんにちは、#{name}です。"
     )
   end
 end

@@ -2,7 +2,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show]
-  before_action :set_report_if_poster, only: %i[edit update destroy]
+  before_action :set_owned_report, only: %i[edit update destroy]
 
   def index
     @reports = Report.includes(:user).order(:id).page(params[:page])
@@ -48,7 +48,7 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
   end
 
-  def set_report_if_poster
+  def set_owned_report
     @report = current_user.reports.find(params[:id])
   end
 

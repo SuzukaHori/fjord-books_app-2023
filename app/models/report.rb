@@ -27,6 +27,6 @@ class Report < ApplicationRecord
     return if content.exclude?(base_url)
     return if mentions_are_unique?(content)
 
-    errors.add(:content, 'に含まれる日報のリンクは、重複できません')
+    errors.add(:content, I18n.t('activerecord.errors.messages.link_is_not_unique', model: Report.model_name.human))
   end
 end

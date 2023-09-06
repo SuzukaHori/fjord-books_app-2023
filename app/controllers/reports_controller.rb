@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[show]
   before_action :set_owned_report, only: %i[edit update destroy]
 
   def index
@@ -9,6 +8,7 @@ class ReportsController < ApplicationController
   end
 
   def show
+    @report = Report.find(params[:id])
     @comments = @report.comments.order(:id)
   end
 
@@ -43,10 +43,6 @@ class ReportsController < ApplicationController
   end
 
   private
-
-  def set_report
-    @report = Report.find(params[:id])
-  end
 
   def set_owned_report
     @report = current_user.reports.find(params[:id])

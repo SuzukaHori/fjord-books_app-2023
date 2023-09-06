@@ -2,6 +2,9 @@ en:
   activerecord:
     models:
       book: Book
+      user: User
+      comment: Comment
+      report: Report
 
     attributes:
       book:
@@ -9,3 +12,22 @@ en:
         memo: Memo
         picture: Picture
         title: Title
+        user: Writer
+      user:
+        name: Name
+        postal_code: Postal code
+        address: Address
+        self_introduction: Self introduction
+        avatar: Avatar
+      comment:
+        user: Writer
+        content: Content
+      report:
+        title: Title
+        content: Content
+        user: Writer
+        created_at: Created at
+  column:
+    message:
+      nothing: No %{model} submitted yet
+      do: "%{action}"

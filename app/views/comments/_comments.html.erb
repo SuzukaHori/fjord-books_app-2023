@@ -1,0 +1,29 @@
+<div class="comments_container">
+  <% if comments.present? %>
+    <table>
+      <caption><%= Comment.model_name.human %></caption>
+      <% comments.each do |comment| %>
+        <tr>
+          <td><strong><%= comment.content %></strong></td>
+          <td><%= comment.user.name_or_email %></td>
+          <td><%= l comment.created_at, format: :short %></td>
+          <td>
+            <% if comment.user == current_user %>
+              <%= button_to t('views.common.destroy', name: Comment.model_name.human), polymorphic_url([commentable, comment]), { method: :delete } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p><%= t('column.message.nothing', model: Comment.model_name.human) %></p>
+  <% end %>
+</div>
+
+<%= form_with model: [commentable, Comment.new] do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content, required: true %>
+  <div class="actions">
+    <%= f.submit t('column.message.do', action: Comment.model_name.human ) %>
+  </div>
+<% end %>

@@ -66,6 +66,19 @@ User.transaction do
   end
 end
 
+Report.destroy_all
+
+Report.transaction do
+  50.times do
+    random_num = User.pluck(:id).sample
+    user = User.find(random_num)
+    user.reports.create!(
+      title: "#{user.name}の日報",
+      content: "今日は#{Faker::Book.title}を読みました。"
+    )
+  end
+end
+
 # 画像は読み込みに時間がかかるので一部のデータだけにする
 User.order(:id).each.with_index(1) do |user, n|
   next unless (n % 8).zero?

@@ -3,6 +3,8 @@ ja:
     models:
       book: 本
       user: ユーザ
+      report: 日報
+      comment: コメント
 
     attributes:
       book:
@@ -10,9 +12,22 @@ ja:
         memo: メモ
         picture: 画像
         title: タイトル
+        user: 投稿者
       user:
         name: 氏名
         postal_code: 郵便番号
         address: 住所
         self_introduction: 自己紹介文
         avatar: ユーザ画像
+      comment:
+        user: 投稿者
+        content: コメント文
+      report:
+        title: タイトル
+        content: 本文
+        user: 投稿者
+        created_at: 投稿日時
+  column:
+    message:
+      nothing: まだ%{model}はありません
+      do: "%{action}をする"

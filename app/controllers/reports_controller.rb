@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  before_action :set_owned_report, only: %i[edit update destroy]
+  before_action :set_report, only: %i[edit update destroy]
 
   def index
     @reports = Report.includes(:user).order(:id).page(params[:page])
@@ -44,7 +44,7 @@ class ReportsController < ApplicationController
 
   private
 
-  def set_owned_report
+  def set_report
     @report = current_user.reports.find(params[:id])
   end
 

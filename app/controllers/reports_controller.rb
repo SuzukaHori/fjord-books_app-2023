@@ -24,10 +24,10 @@ class ReportsController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
         @report.save!
-        create_mention(@report)
+        update_mentions!(@report)
       end
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    rescue StandardError
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
       render :new, status: :unprocessable_entity
     end
   end
@@ -35,11 +35,10 @@ class ReportsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @report.update!(report_params)
-      @report.mentioning_references.destroy_all
-      create_mention(@report)
+      update_mentions!(@report)
     end
     redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-  rescue StandardError
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
     render :edit, status: :unprocessable_entity
   end
 
@@ -50,6 +49,11 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def update_mentions!(report)
+    report.mentioning_references.destroy_all
+    create_mention(report)
+  end
 
   def set_report
     @report = current_user.reports.find(params[:id])

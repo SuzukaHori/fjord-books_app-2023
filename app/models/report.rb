@@ -24,9 +24,16 @@ class Report < ApplicationRecord
   end
 
   def report_url_must_be_unique
-    return if content.exclude?(base_url)
+    return if content.exclude?(Mentionable::BASE_URL)
     return if mentions_are_unique?(content)
 
     errors.add(:content, I18n.t('activerecord.errors.messages.link_is_not_unique', model: Report.model_name.human))
+  end
+
+  private
+
+  def mentions_are_unique?(content)
+    mentioned_ids = extract_ids_from_content(content)
+    mentioned_ids.length == mentioned_ids.uniq.length
   end
 end

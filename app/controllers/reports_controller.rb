@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @report.update!(report_params)
-      @report.active_mentions.destroy_all
+      @report.mentioning_references.destroy_all
       create_mention(@report)
     end
     redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)

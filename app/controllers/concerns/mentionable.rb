@@ -8,7 +8,7 @@ module Mentionable
 
     mentioned_ids = extract_ids_from_content(model.content)
     mentioned_ids.each do |mentioned_id|
-      mention = model.active_mentions.new(mentioned_id:)
+      mention = model.mentioning_references.new(mentioned_id:)
       mention.save!
     end
   end

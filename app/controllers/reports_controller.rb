@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
         @report.save!
-        update_mentions!(@report)
+        @report.update_mentions!
       end
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
@@ -35,7 +35,7 @@ class ReportsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @report.update!(report_params)
-      update_mentions!(@report)
+      @report.update_mentions!
     end
     redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved
@@ -49,11 +49,6 @@ class ReportsController < ApplicationController
   end
 
   private
-
-  def update_mentions!(report)
-    report.mentioning_references.destroy_all
-    create_mention(report)
-  end
 
   def set_report
     @report = current_user.reports.find(params[:id])

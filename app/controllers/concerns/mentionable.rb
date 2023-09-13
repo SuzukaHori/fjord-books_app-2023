@@ -4,7 +4,7 @@ module Mentionable
   extend ActiveSupport::Concern
   BASE_URL = 'http://localhost:3000/reports/'
 
-  def create_mention(model)
+  def create_mentions(model)
     return if model.content.exclude?(BASE_URL)
 
     mentioned_ids = extract_ids_from_content(model.content)

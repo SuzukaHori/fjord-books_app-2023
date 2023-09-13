@@ -31,4 +31,9 @@ class Report < ApplicationRecord
 
     errors.add(:content, I18n.t('activerecord.errors.messages.link_is_not_unique', model: Report.model_name.human))
   end
+
+  def update_mentions!
+    mentioning_references.destroy_all
+    create_mentions(self)
+  end
 end

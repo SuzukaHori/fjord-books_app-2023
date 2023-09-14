@@ -13,7 +13,7 @@ class Report < ApplicationRecord
 
   validates :title, presence: true
   validates :content, presence: true
-  validate :content, :report_url_must_be_unique
+  validate :report_url_must_be_unique
 
   def editable?(target_user)
     user == target_user

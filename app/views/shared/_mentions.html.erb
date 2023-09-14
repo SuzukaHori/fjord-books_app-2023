@@ -1,13 +1,5 @@
-<% if (report.mentioning_references.present?) || (report.mentioned_references.present?) %>
+<% if report.mentioned_references.present? %>
   <div class="mentions-container">
-    <strong><%= t('activerecord.attributes.mention.mentioning', model: Report.model_name.human) %></strong>
-    <ul>
-      <% report.mentioning_reports.each do |report| %>
-        <nav class="page-nav">
-          <li><%= link_to report.title, report_path(report) %></li>
-        </nav>
-      <% end %>
-    </ul>
     <strong><%= I18n.t('activerecord.attributes.mention.mentioned', model: Report.model_name.human) %></strong>
     <ul>
       <% report.mentioned_reports.each do |report| %>

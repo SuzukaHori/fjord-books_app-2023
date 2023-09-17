@@ -3,8 +3,12 @@
 require 'test_helper'
 
 class ReportsControllerTest < ActionDispatch::IntegrationTest
+  include Warden::Test::Helpers
+
   setup do
-    @report = reports(:one)
+    @report = reports(:first_report)
+    @user = users(:suzuka)
+    login_as(@user, scope: :user)
   end
 
   test 'should get index' do

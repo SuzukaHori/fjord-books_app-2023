@@ -3,8 +3,12 @@
 require 'test_helper'
 
 class BooksControllerTest < ActionDispatch::IntegrationTest
+  include Warden::Test::Helpers
+
   setup do
-    @book = books(:one)
+    @user = users(:suzuka)
+    login_as(@user, scope: :user)
+    @book = books(:cherry_book)
   end
 
   test 'should get index' do

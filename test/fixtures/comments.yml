@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: one
-  commentable: one
-  commentable_type: Commentable
-  content: MyString
+  user: suzuka
+  commentable_type: Book
+  commentable_id: 1
+  content: この本は私も読みました。
 
 two:
-  user: two
-  commentable: two
-  commentable_type: Commentable
-  content: MyString
+  user: bob
+  commentable_type: Report
+  commentable_id: 2
+  content: 参考になりました。

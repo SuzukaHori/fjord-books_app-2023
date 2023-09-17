@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  memo: MyText
+cherry_book:
+  id: 1
+  title: プロを目指す人のためのRuby入門
+  memo: 名著です！
 
-two:
-  title: MyString
-  memo: MyText
+code_book:
+  id: 2
+  title: リーダブルコード
+  memo: 感動した

@@ -3,13 +3,11 @@
 require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
+  include Warden::Test::Helpers
+
   setup do
-    @report = reports(:one)
-    visit new_user_session_path
-    fill_in 'Eメール', with: 'suzuka@example.com'
-    fill_in 'パスワード', with: 'password'
-    click_on 'ログイン'
-    assert_text 'ログインしました。'
+    @report = reports(:first_report)
+    login_as(users(:suzuka), scope: :user)
   end
 
   test 'visiting the index' do
@@ -28,6 +26,11 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text '日報が作成されました。'
     assert_text 'チーム開発'
     assert_text 'もうすぐ終わります'
+  end
+
+  test 'should show Report' do
+    visit report_url(@report)
+    assert_text '初日報です'
   end
 
   test 'should update Report' do

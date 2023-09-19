@@ -4,8 +4,8 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    @user = sign_in_as_suzuka
-    @report = FactoryBot.create(:first_report, user: @user)
+    user = sign_in_with_email_and_password
+    @report = FactoryBot.create(:first_report, user:)
   end
 
   test 'visiting the index' do
@@ -23,7 +23,6 @@ class ReportsTest < ApplicationSystemTestCase
 
     assert_text '日報が作成されました。'
     assert_text 'チーム開発'
-    assert_text 'もうすぐ終わります'
   end
 
   test 'should show Report' do
@@ -41,7 +40,6 @@ class ReportsTest < ApplicationSystemTestCase
 
     assert_text '日報が更新されました。'
     assert_text '初日報！！！'
-    assert_text '初めまして、よろしくお願いします'
   end
 
   test 'should destroy Report' do

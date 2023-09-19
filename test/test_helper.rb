@@ -20,4 +20,14 @@ class ActiveSupport::TestCase
     sign_in(user)
     user
   end
+
+  def sign_in_with_email_and_password
+    user = FactoryBot.create(:suzuka)
+    visit new_user_session_path
+    fill_in 'Eメール', with: 'suzuka@example.com'
+    fill_in 'パスワード', with: 'password'
+    click_on 'ログイン'
+    sleep 1
+    user
+  end
 end

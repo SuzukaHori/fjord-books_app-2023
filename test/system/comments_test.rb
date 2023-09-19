@@ -4,7 +4,7 @@ require 'application_system_test_case'
 
 class CommentsTest < ApplicationSystemTestCase
   setup do
-    sign_in_as_suzuka
+    sign_in_with_email_and_password
     @report = FactoryBot.create(:rails_report)
   end
 
@@ -24,6 +24,7 @@ class CommentsTest < ApplicationSystemTestCase
     assert_text 'コメントが作成されました。'
     click_on '削除'
     page.accept_alert
+
     assert_text 'コメントが削除されました。'
   end
 end

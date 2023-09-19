@@ -3,11 +3,11 @@
 require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
-  include Warden::Test::Helpers
 
   setup do
-    @report = reports(:first_report)
-    login_as(users(:suzuka), scope: :user)
+    @user = FactoryBot.create(:suzuka)
+    @report = FactoryBot.create(:first_report, user: @user)
+    sign_in @user
   end
 
   test 'visiting the index' do

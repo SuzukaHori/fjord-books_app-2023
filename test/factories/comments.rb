@@ -1,5 +1,4 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+FactoryBot.define do
 # one:
 #   user: suzuka
 #   commentable_type: Book
@@ -11,3 +10,4 @@
 #   commentable_type: Report
 #   commentable_id: 2
 #   content: 参考になりました。
+end

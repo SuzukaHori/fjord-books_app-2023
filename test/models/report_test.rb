@@ -4,10 +4,13 @@ require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
   test 'editable?(target_user)' do
-    own_report = users(:suzuka).reports.create!(title: 'test', content: 'test')
-    assert_equal true, own_report.editable?(users(:suzuka))
+    suzuka = create(:suzuka)
+    bob = create(:bob)
 
-    others_report = users(:bob).reports.create!(title: 'test', content: 'test')
-    assert_equal false, others_report.editable?(users(:suzuka))
+    own_report = suzuka.reports.create!(title: 'test', content: 'test')
+    assert_equal true, own_report.editable?(suzuka)
+
+    others_report = bob.reports.create!(title: 'test', content: 'test')
+    assert_equal false, others_report.editable?(suzuka)
   end
 end

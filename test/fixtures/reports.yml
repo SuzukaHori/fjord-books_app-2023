@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-first_report:
-  id: 1
-  user: suzuka
-  title: 初日報です
-  content: よろしくお願いします！
+# first_report:
+#   id: 1
+#   user: suzuka
+#   title: 初日報です
+#   content: よろしくお願いします！
 
-second_report:
-  id: 2
-  user: bob
-  title: Rails難しい
-  content: 時間がかかりそうです。
+# second_report:
+#   id: 2
+#   user: bob
+#   title: Rails難しい
+#   content: 時間がかかりそうです。

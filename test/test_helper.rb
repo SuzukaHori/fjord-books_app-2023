@@ -14,4 +14,10 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
   include Devise::Test::IntegrationHelpers
+
+  def sign_in_as_suzuka
+    user = FactoryBot.create(:suzuka)
+    sign_in(user)
+    user
+  end
 end

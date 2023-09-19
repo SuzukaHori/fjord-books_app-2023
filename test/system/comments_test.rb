@@ -4,9 +4,8 @@ require 'application_system_test_case'
 
 class CommentsTest < ApplicationSystemTestCase
   setup do
-    @user = FactoryBot.create(:suzuka)
-    @report = FactoryBot.create(:first_report, user: @user)
-    sign_in @user
+    sign_in_as_suzuka
+    @report = FactoryBot.create(:rails_report)
   end
 
   test 'should create comment' do

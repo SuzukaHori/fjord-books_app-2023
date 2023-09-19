@@ -3,11 +3,9 @@
 require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
-
   setup do
-    @user = FactoryBot.create(:suzuka)
+    @user = sign_in_as_suzuka
     @report = FactoryBot.create(:first_report, user: @user)
-    sign_in @user
   end
 
   test 'visiting the index' do

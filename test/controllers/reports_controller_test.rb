@@ -3,12 +3,9 @@
 require 'test_helper'
 
 class ReportsControllerTest < ActionDispatch::IntegrationTest
-  include Warden::Test::Helpers
-
   setup do
-    @report = reports(:first_report)
-    @user = users(:suzuka)
-    login_as(@user, scope: :user)
+    @user = sign_in_as_suzuka
+    @report = FactoryBot.create(:first_report, user: @user)
   end
 
   test 'should get index' do

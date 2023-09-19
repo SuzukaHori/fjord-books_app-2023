@@ -4,7 +4,7 @@ require 'test_helper'
 
 class ReportMentionTest < ActiveSupport::TestCase
   test 'save_mentions' do
-    user = create(:suzuka)
+    user = FactoryBot.create(:suzuka)
 
     report = user.reports.create!(title: 'メンションなしの日報', content: '今日も楽しく勉強した')
     assert_equal [], report.mentioning_reports.ids

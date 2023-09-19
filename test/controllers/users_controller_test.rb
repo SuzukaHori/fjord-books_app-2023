@@ -3,11 +3,8 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  include Warden::Test::Helpers
-
   def setup
-    @user = users(:suzuka)
-    login_as(@user, scope: :user)
+    @user = sign_in_as_suzuka
   end
 
   test 'should get index' do

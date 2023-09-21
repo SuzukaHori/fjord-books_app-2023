@@ -90,6 +90,7 @@ User.order(:id).each.with_index(1) do |user, n|
 end
 
 Report.destroy_all
+Mention.destroy_all
 
 users = User.all.to_a
 times = Array.new(55) { Faker::Time.between(from: 5.days.ago, to: 1.day.ago) }.sort
@@ -126,6 +127,19 @@ Report.transaction do
     content = contents.sample(content_length).join("\n")
     user.reports.create!(title:, content:, created_at: time, updated_at: time)
   end
+
+  report_mentioning = users.sample.reports.create!(
+    title: titles.sample,
+    content: 'http://localhost:3000/reports/1 この日報いいね'
+  )
+  report_mentioning.mentioning_references.create!(mentioned_id: 1)
+
+  report_mentioning_twice = users.sample.reports.create!(
+    title: titles.sample,
+    content: 'http://localhost:3000/reports/1 http://localhost:3000/reports/2 これは読むべき'
+  )
+  report_mentioning_twice.mentioning_references.create!(mentioned_id: 1)
+  report_mentioning_twice.mentioning_references.create!(mentioned_id: 2)
 end
 
 # dependent: :destroy で全件削除されているはずだが念のため

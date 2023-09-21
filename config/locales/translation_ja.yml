@@ -23,3 +23,10 @@ ja:
         content: 内容
         user: 作成者
         created_on: 作成日
+      mention:
+        mentioning: この%{model}が言及している%{model}
+        mentioned: この%{model}に言及している%{model}
+
+    errors:
+      messages:
+        link_is_not_unique: に含まれる%{model}のリンクは、重複できません

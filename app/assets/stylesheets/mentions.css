@@ -1,0 +1,28 @@
+/****************
+mentions-container
+****************/
+
+.mentions-container {
+    margin-top: 32px;
+    border: dotted var(--global-bw) var(--global-bc);
+    border-radius: var(--global-br);
+    padding: 12px;
+    max-width: var(--single-column-w);
+}
+
+.mentions-container ul {
+    padding-inline-start: 0;
+    list-style: none;
+    
+}
+
+.mentions-container li {
+    line-height: 1.8;
+    border-bottom: solid var(--global-bw) var(--global-bc-muted);
+}
+
+.mentions-container strong {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

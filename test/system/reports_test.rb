@@ -5,7 +5,7 @@ require 'application_system_test_case'
 class ReportsTest < ApplicationSystemTestCase
   setup do
     user = sign_in_with_email_and_password
-    @report = FactoryBot.create(user:)
+    @report = FactoryBot.create(:first_report, user:)
   end
 
   test 'visiting the index' do

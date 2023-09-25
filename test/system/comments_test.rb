@@ -4,8 +4,9 @@ require 'application_system_test_case'
 
 class CommentsTest < ApplicationSystemTestCase
   setup do
-    sign_in_with_email_and_password
+    user = sign_in_with_email_and_password
     @report = FactoryBot.create(:rails_report)
+    @comment = FactoryBot.create(:comment, user:, commentable: @report)
   end
 
   test 'should create comment' do
@@ -19,9 +20,6 @@ class CommentsTest < ApplicationSystemTestCase
 
   test 'should destroy comment' do
     visit report_url(@report)
-    fill_in 'comment[content]', with: '削除のためのコメント'
-    click_on 'コメントする'
-    assert_text 'コメントが作成されました。'
     click_on '削除'
     page.accept_alert
 

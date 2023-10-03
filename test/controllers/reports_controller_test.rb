@@ -4,7 +4,8 @@ require 'test_helper'
 
 class ReportsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @report = reports(:one)
+    user = sign_in_as_suzuka
+    @report = FactoryBot.create(:first_report, user:)
   end
 
   test 'should get index' do

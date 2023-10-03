@@ -4,7 +4,8 @@ require 'test_helper'
 
 class BooksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @book = books(:one)
+    sign_in_as_suzuka
+    @book = FactoryBot.create(:cherry_book)
   end
 
   test 'should get index' do

@@ -12,4 +12,22 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  include FactoryBot::Syntax::Methods
+  include Devise::Test::IntegrationHelpers
+
+  def sign_in_as_suzuka
+    user = FactoryBot.create(:suzuka)
+    sign_in(user)
+    user
+  end
+
+  def sign_in_with_email_and_password
+    user = FactoryBot.create(:suzuka)
+    visit new_user_session_path
+    fill_in 'Eメール', with: user.email
+    fill_in 'パスワード', with: user.password
+    click_on 'ログイン'
+    assert_text 'ログインしました。'
+    user
+  end
 end
